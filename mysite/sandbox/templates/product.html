@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Service{% endblock %}
+
+{% block content %}
+
+<p><strong>Service name: </strong> {{ product.name }} </p>
+<hr>
+<p><strong>Vehicle model/price: </strong>
+{% for model in product.models.all %}
+  <hr>
+    <p>{{ model.price }}</p>
+<hr>
+</p>
+{% endfor %}
+
+{% endblock %}

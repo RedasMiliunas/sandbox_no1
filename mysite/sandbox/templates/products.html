@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Services{% endblock %}
+
+{% block content %}
+<h3>Our services:</h3>
+  {% for element in products %}
+<hr>
+<a href="{% url 'product' element.id %}">
+<p>{{ element }}</p>
+  </a>
+<hr>
+  {% endfor %}
+{% endblock %}
