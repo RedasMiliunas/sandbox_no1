@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
 # Create your models here.
 
@@ -52,12 +53,17 @@ class ProductPrice(models.Model):
 
 
 class Order(models.Model):
-    customer = models.ForeignKey(to=User, verbose_name='User', on_delete=models.CASCADE, help_text='Pick your USER here')
+    customer = models.ForeignKey(to=User, verbose_name='User', on_delete=models.SET_NULL, null=True, blank=True, help_text='Pick your USER here')
     date = models.DateTimeField(verbose_name='Date n Time', auto_now_add=True, help_text='Pick your date here')
     status = models.ForeignKey(to='Status', verbose_name='Status', on_delete=models.SET_NULL, null=True, help_text='Pick your status here')
+    due_back = models.DateField(verbose_name='Will be available', null=True, blank=True)
+
+
+    def is_overdue(self):
+        return self.due_back and date.today() > self.due_back
 
     def __str__(self):
-        return f'{self.customer}: [{self.date} - {self.status}]'
+        return f'{self.customer}: [{self.date} - {self.status} ({self.due_back})]'
 
     class Meta:
         verbose_name = "Order"
@@ -67,6 +73,7 @@ class OrderLine(models.Model):
     order = models.ForeignKey(to='Order', verbose_name='Order', on_delete=models.CASCADE, help_text='Your orderline here', related_name='lines')
     product = models.ForeignKey(to='Product', verbose_name='Product', on_delete=models.SET_NULL, null=True, help_text='Your product here')
     qty = models.IntegerField(verbose_name='Quantity')
+
 
     def __str__(self):
         return f'{self.order}: [{self.product} x {self.qty}]'

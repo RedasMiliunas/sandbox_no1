@@ -5,9 +5,10 @@ class OrderLineInline(admin.TabularInline):
     model = OrderLine
     extra = 0
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['customer', 'date', 'status']
+    list_display = ['customer', 'date', 'status', 'due_back']
     inlines = [OrderLineInline]
-    list_filter = ['status', 'customer', 'date']
+    list_filter = ['status', 'customer', 'date', 'due_back']
+    list_editable = ['status', 'due_back',]
 # Register your models here.
 
 admin.site.register(Status)
