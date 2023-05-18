@@ -8,7 +8,7 @@
 <ol>
 {% for element in user_orders %}
 <li>
-<p class="{% if element.is_overdue %}text-danger{% endif %}">{{ element }}</p>
+<p>{{ element.customer }} <a href="{% url 'order' element.pk %}">[{{ element.date }}]</a>; {{ element.status }} : <span class="{% if element.is_overdue %}text-danger{% endif %}">[{{ element.due_back }}]</span></p>
     </li>
 <hr>
 {% endfor %}
