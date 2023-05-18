@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, VehicleModel, ProductPrice, Order, OrderLine, Status
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -38,3 +39,13 @@ class OrderDetailView(generic.DetailView):
     model = Order
     template_name = 'order.html'
     context_object_name = 'order'
+
+class UserOrdersListView(LoginRequiredMixin, generic.ListView):
+    model = Order
+    template_name = 'user_orders.html'
+    context_object_name = 'user_orders'
+
+    def get_queryset(self):
+        return Order.objects.filter(customer=self.request.user)
+
+

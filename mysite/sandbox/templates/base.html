@@ -42,7 +42,7 @@
                               clip-rule="evenodd"/>
                     </svg>
                     <strong>{{ user.get_username }}</strong></a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><strong>MY ORDERS</strong></a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'user_orders' %}"><strong>MY ORDERS</strong></a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><strong>LOGOUT</strong></a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="#"><strong>REGISTER</strong></a></li>
