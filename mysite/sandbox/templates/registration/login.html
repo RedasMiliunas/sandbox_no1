@@ -5,12 +5,14 @@
 {% block content %}
 
   {% if form.errors %}
-    <p>Login Error: Try to log-in again!</p>
+    <p><strong>Login Error: Try to log-in again!</strong></p>
   {% endif %}
   
   {% if next %}
     {% if user.is_authenticated %}
-      <p>You don't have permission to access this information. You must be logged-in.</p>
+      <p><strong>You don't have permission to access this information. You must be logged-in!</strong></p>
+      {% else %}
+      <p><strong>If you want to see this information you must log-in!</strong></p>
     {% endif %}
   {% endif %}
   
