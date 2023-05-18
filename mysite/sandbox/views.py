@@ -1,9 +1,18 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, VehicleModel, ProductPrice, Order, OrderLine
+from .models import Product, VehicleModel, ProductPrice, Order, OrderLine, Status
 from django.views import generic
 
 
 # Create your views here.
+
+def homepage(request):
+    context = {
+        'service_count': Product.objects.count(),
+        'orders_count': Order.objects.count(),
+        'orders_done': Status.objects.filter(name='Done').count(),
+    }
+    return render(request, 'homepage.html', context=context)
+
 def products(request):
     context = {
         'products': Product.objects.all()
