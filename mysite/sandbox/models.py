@@ -63,7 +63,7 @@ class Order(models.Model):
         return self.due_back and date.today() > self.due_back
 
     def __str__(self):
-        return f'{self.customer}: [{self.date} - {self.status} ({self.due_back})]'
+        return f'{self.customer} [{self.date}] - ({self.status} [{self.due_back}])'
 
     class Meta:
         verbose_name = "Order"

@@ -5,9 +5,12 @@
 {% block content %}
 <h3><strong>My Orders:</strong></h3>
 <hr>
+<ol>
 {% for element in user_orders %}
-<p>{{ element }}</p>
+<li>
+<p class="{% if element.is_overdue %}text-danger{% endif %}">{{ element }}</p>
+    </li>
 <hr>
 {% endfor %}
-
+</ol>
 {% endblock %}
