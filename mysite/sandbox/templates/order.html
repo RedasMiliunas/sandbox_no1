@@ -3,6 +3,7 @@
 {% block title %}ORDER{% endblock %}
 
 {% block content %}
+<hr>
 <h3>Single order:</h3>
 <hr>
 <p><strong>Customer name: </strong> {{ order.customer }} </p>
@@ -12,10 +13,12 @@
 
 <hr>
 <h3>Booked services:</h3>
+<hr>
 {% for line in order.lines.all %}
 
-<p><strong>{{ line.product }} ({% for element in line.product.products.all %}{% endfor %}){{line.product_price}}</strong> - {{ line.qty }}</p>
+<p><strong>{{ line.product }} ({% for element in line.product.products.all %}{% endfor %}{{line.product_price}})</strong> - {{ line.qty }}</p>
 
 {% endfor %}
+<hr>
 <hr>
 {% endblock %}
