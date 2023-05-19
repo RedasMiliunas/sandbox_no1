@@ -41,7 +41,7 @@ class ProductPrice(models.Model):
     # name = models.ForeignKey(to='Product', verbose_name='Product', on_delete=models.CASCADE, help_text='Product name for the price')
     price = models.FloatField(verbose_name='Price', help_text='Price for actual product by car model')
     model = models.ForeignKey(to='VehicleModel', verbose_name='Model', on_delete=models.SET_NULL, null=True, blank=True, )
-    product = models.ForeignKey(to='Product', on_delete=models.SET_NULL, null=True, blank=True,)
+    product = models.ForeignKey(to='Product', on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
 
     def __str__(self):
         return f'{self.product} - {self.price} [{self.model}]'
