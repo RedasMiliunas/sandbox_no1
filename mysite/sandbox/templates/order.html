@@ -16,7 +16,7 @@
 <hr>
 {% for line in order.lines.all %}
 
-<p><strong>{{ line.product }} ({% for element in line.product.products.all %}{% endfor %}{{line.product_price}})</strong> - {{ line.qty }}</p>
+<p><strong>{{ line.product }} {% for element in line.product.products.all %}{% endfor %}</strong>({{line.product_price}})<strong> - {{ line.qty }}; SUM: </strong>({{ line.sum_for }})</p>
 
 {% endfor %}
 <hr>

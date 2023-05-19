@@ -84,6 +84,9 @@ class OrderLine(models.Model):
     def product_price(self):
         return ProductPrice.objects.filter(model=self.order.model, product=self.product).first().price
 
+    def sum_for(self):
+        return self.product_price() * self.qty
+
 
     class Meta:
         verbose_name = "OrderLine"
