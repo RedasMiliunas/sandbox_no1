@@ -9,6 +9,7 @@
 <p><strong>Date: </strong> {{ order.date }} </p>
 <p><strong>Order status: </strong> {{ order.status }} </p>
 <p><strong>Deadline: </strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">[{{ order.due_back }}]</span> </p>
+
 <hr>
 <h3>Booked services:</h3>
 {% for line in order.lines.all %}
