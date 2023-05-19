@@ -62,6 +62,14 @@ class Order(models.Model):
                               blank=True, )
 
 
+    def total(self):
+        total = 0
+        lines = self.lines.all()
+        for line in lines:
+            total += line.sum_for()
+        return total
+
+
     def is_overdue(self):
         return self.due_back and date.today() > self.due_back
 
