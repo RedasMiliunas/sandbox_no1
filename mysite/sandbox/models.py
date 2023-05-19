@@ -58,6 +58,8 @@ class Order(models.Model):
     date = models.DateTimeField(verbose_name='Date n Time', auto_now_add=True, help_text='Pick your date here')
     status = models.ForeignKey(to='Status', verbose_name='Status', on_delete=models.SET_NULL, null=True, help_text='Pick your status here')
     due_back = models.DateField(verbose_name='Will be available', null=True, blank=True)
+    model = models.ForeignKey(to='VehicleModel', verbose_name='Model', on_delete=models.SET_NULL, null=True,
+                              blank=True, )
 
 
     def is_overdue(self):
@@ -78,6 +80,9 @@ class OrderLine(models.Model):
 
     def __str__(self):
         return f'{self.order}: [{self.product} x {self.qty}]'
+
+    def product_price(self):
+        return ProductPrice.objects.filter(model=self.order.model, product=self.product).first().price
 
 
     class Meta:

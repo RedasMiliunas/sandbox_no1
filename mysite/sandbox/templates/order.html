@@ -14,7 +14,8 @@
 <h3>Booked services:</h3>
 {% for line in order.lines.all %}
 
-<p><strong>{{ line.product }} ({% for element in line.product.products.all %}/{{element.price}}/{% endfor %})</strong> - {{ line.qty }}</p>
+<p><strong>{{ line.product }} ({% for element in line.product.products.all %}{% endfor %}){{line.product_price}}</strong> - {{ line.qty }}</p>
 
 {% endfor %}
+<hr>
 {% endblock %}
