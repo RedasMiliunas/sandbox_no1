@@ -22,4 +22,33 @@
 <hr>
 <p><strong>TOTAL SUM:</strong> {{ order.total }} </p>
 <hr>
+<h3>SUM UP:</h3>
+<hr>
+
+<table class="table table-dark table-hover">
+    <tr>
+        <th>Service:</th>
+        <th>Price:</th>
+        <th>Quantity:</th>
+        <th>SUM:</th>
+    </tr>
+{% for line in order.lines.all %}
+    <tr>
+        <td>{{ line.product }}</td>
+        <td>{{ line.product_price }}</td>
+        <td>{{ line.qty }}</td>
+        <td>{{ line.sum_for }}</td>
+    </tr>
+{% endfor %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td><strong>TOTAL: </strong></td>
+        <td>{{ order.total }}</td>
+    </tr>
+</table>
+<hr>
+<hr>
+
+
 {% endblock %}
