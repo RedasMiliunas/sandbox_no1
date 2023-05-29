@@ -13,4 +13,29 @@
 <hr>
 {% endfor %}
 </ol>
+
+<h3><strong>My Orders Table:</strong></h3>
+<table class="table table-dark table-hover">
+    <tr>
+        <th>Username:</th>
+        <th>Order Date:</th>
+        <th>Status:</th>
+        <th>Due Date:</th>
+    </tr>
+{% for element in user_orders %}
+    <tr>
+        <td>{{ element.customer }}</td>
+        <td><a href="{% url 'order' element.pk %}">[{{ element.date }}]</a></td>
+        <td>{{ element.status }}</td>
+        <td><span class="{% if element.is_overdue %}text-danger{% endif %}">[{{ element.due_back }}]</span></td>
+    </tr>
+{% endfor %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td><strong>TOTAL: </strong></td>
+        <td>{{ element.objects.count }}</td>
+    </tr>
+</table>
+<hr>
 {% endblock %}

@@ -3,6 +3,45 @@
 {% block title %}HOMEPAGE{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<h3><strong>ABOUT US:</strong></h3>
+<hr>
+<p><strong>We are a brand new BMW auto-service with highly experienced employees.</strong></p>
+<p><strong>Our main focus is BMW models from soft-to-hard vehicles.</strong></p>
+<hr>
+<p><strong>Main statistics:</strong></p>
+<hr>
+<table class="table table-dark table-hover">
+    <tr>
+        <th>Info:</th>
+        <th>Count:</th>
+    </tr>
+
+    <tr>
+        <td><strong>Available Services: </strong></td>
+        <td>{{ service_count }}</td>
+    </tr>
+
+    <tr>
+        <td><strong>Orders (all): </strong></td>
+        <td>{{ orders_count }}</td>
+    </tr>
+
+    <tr>
+        <td><strong>Orders Done: </strong></td>
+        <td>{{ orders_done }}</td>
+    </tr>
+
+    <tr>
+        <td><strong>Your Visits: </strong></td>
+        <td>{{ num_visits }}</td>
+    </tr>
+</table>
+<hr>
+    <p><strong>Extra INFO:</strong></p>
+    <p><strong>For vehicles under status 'Done' - Pick-up Time is 1-6 PM.</strong></p>
+    <hr>
+{% else %}
 <h3><strong>ABOUT US:</strong></h3>
 <hr>
 <p><strong>We are a brand new BMW auto-service with highly experienced employees.</strong></p>
@@ -32,7 +71,8 @@
     </tr>
 </table>
 <hr>
-<p><strong>Extra INFO:</strong></p>
-<p><strong>For vehicles under status 'Done' - Pick-up Time is 1-6 PM.</strong></p>
-<hr>
+    <p><strong>Extra INFO:</strong></p>
+    <p><strong>For vehicles under status 'Done' - Pick-up Time is 1-6 PM.</strong></p>
+    <hr>
+    {% endif %}
 {% endblock %}

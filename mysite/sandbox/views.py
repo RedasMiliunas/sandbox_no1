@@ -7,10 +7,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def homepage(request):
+
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'service_count': Product.objects.count(),
         'orders_count': Order.objects.count(),
         'orders_done': Status.objects.filter(name='Done').count(),
+        'num_visits': num_visits,
     }
     return render(request, 'homepage.html', context=context)
 

@@ -61,6 +61,14 @@ class Order(models.Model):
     model = models.ForeignKey(to='VehicleModel', verbose_name='Model', on_delete=models.SET_NULL, null=True,
                               blank=True, )
 
+    # def order_count(self):
+    #     return Order.objects.filter(customer=self.order.user).count()
+    def order_count(self):
+        count = 0
+        orders = self.objects.all()
+        for order in orders:
+            count += order
+        return count
 
     def total(self):
         total = 0
