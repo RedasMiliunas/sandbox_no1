@@ -7,7 +7,7 @@
   {% for element in products %}
 <hr>
 <a href="{% url 'product' element.id %}">
-<p>{{ element }}</p>
+<p><strong> {{ element }} </strong></p>
   </a>
 <hr>
   {% endfor %}
