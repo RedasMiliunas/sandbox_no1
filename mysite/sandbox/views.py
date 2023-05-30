@@ -43,8 +43,10 @@ def product(request, product_id):
 def search(request):
     query = request.GET.get('query')
     search_results = Product.objects.filter(Q(name__icontains=query))
+    search_results2 = ProductPrice.objects.filter(Q(model__model__icontains=query))
     context = {
         'products': search_results,
+        'products2': search_results2,
         'query': query,
     }
     return render(request, 'search.html', context=context)
