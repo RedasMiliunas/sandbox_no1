@@ -41,7 +41,7 @@ def product(request, product_id):
     return render(request, 'product.html', context=context)
 
 def models(request):
-    paginator = Paginator(VehicleModel.objects.all(), 2)
+    paginator = Paginator(VehicleModel.objects.all(), 4)
     page_number = request.GET.get('page')
     paged_models = paginator.get_page(page_number)
     context = {
