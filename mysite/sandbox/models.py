@@ -6,6 +6,7 @@ from datetime import date
 
 class VehicleModel(models.Model):
     model = models.CharField(verbose_name='Model', max_length=20, help_text="Vehicle's model")
+    photo = models.ImageField(verbose_name='Photo', upload_to='photos', null=True, blank=True)
 
     def __str__(self):
         return self.model

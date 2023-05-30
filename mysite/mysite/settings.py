@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from .my_settings import SECRET_KEY, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -135,3 +136,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+
+# media folder settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'sandbox/media')
+
+MEDIA_URL = '/media/'
+# print(MEDIA_ROOT) - nevenkite padebuginti, bus lengviau nepasiklysti django filesystem džiunglėse
