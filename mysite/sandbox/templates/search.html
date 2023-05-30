@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<h3>Search Results for '{{ query }}' are:</h3>
+  {% for element in products %}
+<hr>
+<a href="{% url 'product' element.id %}">
+<p><strong> {{ element }} </strong></p>
+  </a>
+<hr>
+  {% endfor %}
+
+{% endblock %}

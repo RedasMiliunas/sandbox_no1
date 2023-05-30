@@ -3,6 +3,7 @@ from .models import Product, VehicleModel, ProductPrice, Order, OrderLine, Statu
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 # Create your views here.
@@ -38,6 +39,15 @@ def product(request, product_id):
         # 'prices': get_object_or_404(ProductPrice, pk=product_id),
     }
     return render(request, 'product.html', context=context)
+
+def search(request):
+    query = request.GET.get('query')
+    search_results = Product.objects.filter(Q(name__icontains=query))
+    context = {
+        'products': search_results,
+        'query': query,
+    }
+    return render(request, 'search.html', context=context)
 
 class OrderListView(generic.ListView):
     model = Order
