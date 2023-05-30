@@ -40,6 +40,21 @@ def product(request, product_id):
     }
     return render(request, 'product.html', context=context)
 
+def models(request):
+    paginator = Paginator(VehicleModel.objects.all(), 2)
+    page_number = request.GET.get('page')
+    paged_models = paginator.get_page(page_number)
+    context = {
+        'models': paged_models,
+    }
+    return render(request, 'models.html', context=context)
+
+def model(request, model_id):
+    context = {
+        'model': get_object_or_404(VehicleModel, pk=model_id),
+    }
+    return render(request, 'model.html', context=context)
+
 def search(request):
     query = request.GET.get('query')
     search_results = Product.objects.filter(Q(name__icontains=query))

@@ -27,5 +27,7 @@ urlpatterns = [
     path('orders/', views.OrderListView.as_view(), name='orders'),
     path('orders/<int:pk>', views.OrderDetailView.as_view(), name='order'),
     path('user_orders/', views.UserOrdersListView.as_view(), name='user_orders'),
+    path('models/', views.models, name='models'),
+    path('models/<int:model_id>', views.model, name='model'),
     path('search/', views.search, name='search'),
 ]

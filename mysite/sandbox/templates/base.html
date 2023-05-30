@@ -29,8 +29,9 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'homepage' %}"><strong>HOMEPAGE</strong></a>
-                    <a class="nav-link" href="#">Automobiliai</a>
+
                     <a class="nav-link" href="{% url 'orders' %}"><strong>ORDERS</strong></a>
+                    <a class="nav-link" href="{% url 'models' %}"><strong>BMW MODELS</strong></a>
                     <a class="nav-link" href="{% url 'products' %}"><strong>SERVICES</strong></a>
                 </li>
                 {% if user.is_authenticated %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Models{% endblock %}
+
+{% block content %}
+<h3><strong>Models Available for Service:</strong></h3>
+<hr>
+  {% for element in models %}
+<hr>
+<a href="{% url 'model' element.id %}">
+<p><strong> {{ element }} </strong></p>
+  </a>
+<hr>
+  {% endfor %}
+<div class="container pages">
+    <nav aria-label="...">
+        {% if models.has_other_pages %}
+            <ul class="pagination pagination-sm justify-content-center">
+                {% for i in models.paginator.page_range %}
+                    {% if models.number == i %}
+                        <li class="page-item active">
+                            <a class="page-link">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </nav>
+</div>
+{% endblock %}
