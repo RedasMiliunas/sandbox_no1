@@ -7,7 +7,7 @@
 {% if products %}
   {% for element in products %}
 <hr>
-<a href="{% url 'product' element.id %}{% url 'model' element.id%}">
+<a href="{% url 'product' element.id %}">
 <p><strong> {{ element }} </strong></p>
   </a>
 <hr>
