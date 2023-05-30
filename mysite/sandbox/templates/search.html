@@ -3,7 +3,8 @@
 {% block title %}Search Results{% endblock %}
 
 {% block content %}
-<h3>Search Results for '{{ query }}' are:</h3>
+<h3><strong>Search Results for '{{ query }}' are:</strong></h3>
+{% if products %}
   {% for element in products %}
 <hr>
 <a href="{% url 'product' element.id %}">
@@ -11,5 +12,10 @@
   </a>
 <hr>
   {% endfor %}
+{% else %}
+<hr>
+<h4>No Results for '{{ query }}' were found.</h4>
+<hr>
+{% endif %}
 
 {% endblock %}
