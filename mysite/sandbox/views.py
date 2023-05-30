@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, VehicleModel, ProductPrice, Order, OrderLine, Status
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -20,8 +21,11 @@ def homepage(request):
     return render(request, 'homepage.html', context=context)
 
 def products(request):
+    paginator = Paginator(Product.objects.all(), 4)
+    page_number = request.GET.get('page')
+    paged_services = paginator.get_page(page_number)
     context = {
-        'products': Product.objects.all()
+        'products': paged_services
     }
     return render(request, 'products.html', context=context)
 
