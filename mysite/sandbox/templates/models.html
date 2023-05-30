@@ -3,15 +3,31 @@
 {% block title %}Models{% endblock %}
 
 {% block content %}
+ {% load static %}
 <h3><strong>Models Available for Service:</strong></h3>
 <hr>
+{% if models %}
+<div class="row">
   {% for element in models %}
+    <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+            {% if element.photo %}
+              <img src="{{ element.photo.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{ element.model }}</h6>
+              <p class="card-text"><a href="{{ element.id }}">Model Description</a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p>No Available Models at the moment.</p>
 <hr>
-<a href="{% url 'model' element.id %}">
-<p><strong> {{ element }} </strong></p>
-  </a>
-<hr>
-  {% endfor %}
+{% endif %}
 <div class="container pages">
     <nav aria-label="...">
         {% if models.has_other_pages %}
