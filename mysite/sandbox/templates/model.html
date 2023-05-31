@@ -16,12 +16,14 @@
 <hr>
 <h4><strong> {{ model }} </strong></h4>
 <hr>
+<h5><strong>Model Description:</strong></h5>
+{{ model.description | safe }}
 <hr>
 
 {% for product in products.all %}
 
   <hr>
-    <p>{{ product.name }} : {{ product.price }} </p>
+    <p>{{ product.name }} : {{ product.products.model.price }} </p>
 <hr>
 {% endfor %}
 

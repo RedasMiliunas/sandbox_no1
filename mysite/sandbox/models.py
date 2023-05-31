@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
+from tinymce.models import HTMLField
 
 # Create your models here.
 
 class VehicleModel(models.Model):
     model = models.CharField(verbose_name='Model', max_length=20, help_text="Vehicle's model")
     photo = models.ImageField(verbose_name='Photo', upload_to='photos', null=True, blank=True)
+    description = HTMLField(verbose_name='Description', max_length=3000, default='')
 
     def __str__(self):
         return self.model
