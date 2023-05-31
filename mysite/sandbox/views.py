@@ -4,6 +4,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.views.decorators.csrf import csrf_protect
 
 
 # Create your views here.
@@ -85,4 +86,9 @@ class UserOrdersListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Order.objects.filter(customer=self.request.user)
 
-
+@csrf_protect
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+    else:
+       return render(request, 'registration/register.html')

@@ -30,4 +30,5 @@ urlpatterns = [
     path('models/', views.models, name='models'),
     path('models/<int:model_id>', views.model, name='model'),
     path('search/', views.search, name='search'),
+    path('register/', views.register, name='register'),
 ]
