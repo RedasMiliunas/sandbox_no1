@@ -52,6 +52,7 @@ def models(request):
 def model(request, model_id):
     context = {
         'model': get_object_or_404(VehicleModel, pk=model_id),
+        'products': Product.objects.all(),
     }
     return render(request, 'model.html', context=context)
 

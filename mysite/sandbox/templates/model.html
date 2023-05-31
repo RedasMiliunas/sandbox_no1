@@ -3,9 +3,26 @@
 {% block title %}Model{% endblock %}
 
 {% block content %}
-
+{% load static %}
+  {% if model.photo %}
+  <div class="col-md-4 align-items-stretch">
+    <img src="{{ model.photo.url }}" class="card-img-top" alt="...">
+    </div>
+  {% else %}
+    <div class="col-md-4 align-items-stretch">
+    <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+  </div>
+  {% endif %}
+<hr>
 <h4><strong> {{ model }} </strong></h4>
 <hr>
+<hr>
 
+{% for product in products.all %}
+
+  <hr>
+    <p>{{ product.name }} : {{ product.price }} </p>
+<hr>
+{% endfor %}
 
 {% endblock %}
