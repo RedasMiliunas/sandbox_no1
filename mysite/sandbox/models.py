@@ -19,7 +19,7 @@ class VehicleModel(models.Model):
 
 
 class Status(models.Model):
-    name = models.CharField(verbose_name='Status', max_length=50, help_text='Pick your status here')
+    name = models.CharField(verbose_name='Status', max_length=50, help_text='Pick your status here', default='Under administration')
 
     def __str__(self):
         return self.name
