@@ -3,6 +3,16 @@
 {% block title %}ORDER{% endblock %}
 
 {% block content %}
+{% if order.is_overdue %}
+<hr style="height:2px;border-width:0;color:gray;background-color:red">
+<h3>Single order:</h3>
+<hr style="height:2px;border-width:0;color:gray;background-color:red">
+<p><strong>Customer name: </strong> {{ order.customer }} </p>
+<p><strong>Date: </strong> {{ order.date }} </p>
+<p><strong>Order status: </strong> {{ order.status }} </p>
+<p><strong>Deadline: </strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">[{{ order.due_back }}]</span> </p>
+<br>
+{% else %}
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3>Single order:</h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -11,6 +21,7 @@
 <p><strong>Order status: </strong> {{ order.status }} </p>
 <p><strong>Deadline: </strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">[{{ order.due_back }}]</span> </p>
 <br>
+{% endif %}
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3>Booked services:</h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -22,9 +33,9 @@
 <hr>
 <p><strong>TOTAL SUM:</strong> {{ order.total }} </p>
 <br>
-<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<hr style="height:2px;border-width:0;color:gray;background-color:red">
 <h3>SUM UP:</h3>
-<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<hr style="height:2px;border-width:0;color:gray;background-color:red">
 
 <table class="table table-dark table-hover">
     <tr>
