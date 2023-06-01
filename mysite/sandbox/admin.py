@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import Status, Product, ProductPrice, Order, OrderLine, VehicleModel
+from .models import (Status,
+                     Product,
+                     ProductPrice,
+                     Order,
+                     OrderLine,
+                     VehicleModel,
+                     OrderReview,)
 
 class OrderLineInline(admin.TabularInline):
     model = OrderLine
@@ -9,6 +15,11 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderLineInline]
     list_filter = ['status', 'customer', 'date', 'due_back']
     list_editable = ['status', 'due_back',]
+
+
+class BookReviewAdmin(admin.ModelAdmin):
+    list_display = ('order', 'date_created', 'commentator', 'comment')
+
 # Register your models here.
 
 admin.site.register(Status)
@@ -17,3 +28,4 @@ admin.site.register(ProductPrice)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderLine)
 admin.site.register(VehicleModel)
+admin.site.register(OrderReview, BookReviewAdmin)
