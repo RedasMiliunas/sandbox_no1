@@ -63,6 +63,18 @@
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3>Comments:</h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+  {% if user.is_authenticated %}
+  <div class="fieldWrapper">
+    <hr><br/>
+    <h4>Comment here:</h4>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.comment }}</br>
+      <input type="submit" value="Comment now">
+    </form>
+  </div>
+  {% endif %}
+<br>
   {% if order.comments.all %}
     {% for comment in order.comments.all %}
       <hr>
