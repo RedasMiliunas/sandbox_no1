@@ -26,6 +26,10 @@ def homepage(request):
     }
     return render(request, 'homepage.html', context=context)
 
+def contacts(request):
+    return render(request, 'contacts.html')
+
+
 def products(request):
     paginator = Paginator(Product.objects.all(), 4)
     page_number = request.GET.get('page')

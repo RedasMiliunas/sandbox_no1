@@ -42,6 +42,7 @@
                         <a class="nav-link" href="{% url 'homepage' %}"><strong>HOMEPAGE</strong></a>
                         <a class="nav-link" href="{% url 'models' %}"><strong>BMW MODELS</strong></a>
                         <a class="nav-link" href="{% url 'products' %}"><strong>SERVICES</strong></a>
+                        <a class="nav-link" href="{% url 'contacts' %}"><strong>CONTACTS</strong></a>
                     </li>
                 {% endif %}
             {% else %}
@@ -50,6 +51,7 @@
                         <a class="nav-link" href="{% url 'homepage' %}"><strong>HOMEPAGE</strong></a>
                         <a class="nav-link" href="{% url 'models' %}"><strong>BMW MODELS</strong></a>
                         <a class="nav-link" href="{% url 'products' %}"><strong>SERVICES</strong></a>
+                        <a class="nav-link" href="{% url 'contacts' %}"><strong>CONTACTS</strong></a>
                     </li>
             {% endif %}
                 {% if user.is_authenticated %}
