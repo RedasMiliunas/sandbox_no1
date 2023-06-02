@@ -31,6 +31,6 @@ urlpatterns = [
     path('models/<int:model_id>', views.model, name='model'),
     path('search/', views.search, name='search'),
     path('register/', views.register, name='register'),
-    path('product_price/', views.ProductPriceListView.as_view(), name='product_price'),
+    # path('product_price/', views.ProductPriceListView.as_view(), name='product_price'),
     path('vehicle_model/<int:pk>', views.VehicleModelDetailView.as_view(), name='vehicle_model'),
 ]
