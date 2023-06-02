@@ -10,9 +10,14 @@ from .models import (Status,
 class OrderLineInline(admin.TabularInline):
     model = OrderLine
     extra = 0
+
+class OrderCommentInLine(admin.TabularInline):
+    model = OrderComment
+    extra = 0
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['customer', 'date', 'status', 'due_back']
-    inlines = [OrderLineInline]
+    inlines = [OrderLineInline, OrderCommentInLine]
     list_filter = ['status', 'customer', 'date', 'due_back']
     list_editable = ['status', 'due_back',]
 
