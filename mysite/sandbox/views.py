@@ -73,12 +73,21 @@ def search(request):
     return render(request, 'search.html', context=context)
 
 
+class ProductPriceListView(generic.ListView):
+    model = ProductPrice
+    template_name = 'product_price.html'
+    context_object_name = 'product_price'
 
+class VehicleModelDetailView(generic.DetailView):
+    model = VehicleModel
+    template_name = 'vehicle_model.html'
+    context_object_name = 'vehicle_model'
 
 class OrderListView(generic.ListView):
     model = Order
     template_name = 'orders.html'
     context_object_name = 'orders'
+
 
 class OrderDetailView(FormMixin, generic.DetailView):
     model = Order

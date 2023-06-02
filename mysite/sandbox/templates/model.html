@@ -20,11 +20,14 @@
 {{ model.description | safe }}
 <hr>
 
-{% for product in products.all %}
+{% for element in product_price %}
 
   <hr>
-    <p>{{ product.name }} : {{ product.products.model.price }} </p>
+    <p>{{ element.product.name }} : {{ element.price }} </p>
 <hr>
 {% endfor %}
+
+<h4><strong>GET PRICES FOR ALL SERVICES</strong></h4>
+<p><a href="{% url 'vehicle_model' model.id %}">PRESS HERE</a></p>
 
 {% endblock %}

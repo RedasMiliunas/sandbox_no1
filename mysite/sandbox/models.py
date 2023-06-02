@@ -49,6 +49,10 @@ class ProductPrice(models.Model):
     def __str__(self):
         return f'{self.product} - {self.price} [{self.model}]'
 
+
+    def product_price2(self):
+        return ProductPrice.objects.filter(model=self.model, product=self.product).first().price
+
     class Meta:
         verbose_name = "Price"
         verbose_name_plural = "Prices"
