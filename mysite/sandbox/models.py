@@ -112,7 +112,7 @@ class OrderLine(models.Model):
         verbose_name_plural = "OrderLines"
 
 
-class OrderReview(models.Model):
+class OrderComment(models.Model):
     order = models.ForeignKey(to='Order', verbose_name='Order', on_delete=models.SET_NULL, null=True, blank=True, related_name='comments')
     commentator = models.ForeignKey(to=User, verbose_name='User', on_delete=models.SET_NULL, null=True, blank=True, )
     date_created = models.DateTimeField(verbose_name='Date n Time', auto_now_add=True, )

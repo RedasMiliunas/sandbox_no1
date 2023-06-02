@@ -72,6 +72,9 @@ def search(request):
     }
     return render(request, 'search.html', context=context)
 
+
+
+
 class OrderListView(generic.ListView):
     model = Order
     template_name = 'orders.html'

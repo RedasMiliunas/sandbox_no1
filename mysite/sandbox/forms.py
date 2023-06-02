@@ -1,7 +1,7 @@
 from django import forms
-from .models import OrderReview
+from .models import OrderComment
 
 class OrderReviewForm(forms.ModelForm):
     class Meta:
-        model = OrderReview
+        model = OrderComment
         fields = ['comment', ]

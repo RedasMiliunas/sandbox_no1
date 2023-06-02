@@ -5,7 +5,7 @@ from .models import (Status,
                      Order,
                      OrderLine,
                      VehicleModel,
-                     OrderReview,)
+                     OrderComment, )
 
 class OrderLineInline(admin.TabularInline):
     model = OrderLine
@@ -17,7 +17,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_editable = ['status', 'due_back',]
 
 
-class BookReviewAdmin(admin.ModelAdmin):
+class OrderReviewAdmin(admin.ModelAdmin):
     list_display = ('order', 'date_created', 'commentator', 'comment')
 
 # Register your models here.
@@ -28,4 +28,4 @@ admin.site.register(ProductPrice)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderLine)
 admin.site.register(VehicleModel)
-admin.site.register(OrderReview, BookReviewAdmin)
+admin.site.register(OrderComment, OrderReviewAdmin)
