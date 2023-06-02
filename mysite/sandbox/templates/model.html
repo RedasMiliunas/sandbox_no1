@@ -13,19 +13,13 @@
     <img src="{% static 'img/no-image.png' %}" class="max-width: 20%">
   </div>
   {% endif %}
-<hr>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h4><strong> {{ model }} </strong></h4>
 <hr>
 <h5><strong>Model Description:</strong></h5>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 {{ model.description | safe }}
-<hr>
 
-{% for element in product_price %}
-
-  <hr>
-    <p>{{ element.product.name }} : {{ element.price }} </p>
-<hr>
-{% endfor %}
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h4><strong>GET PRICES FOR ALL SERVICES</strong></h4>
 <p><a href="{% url 'vehicle_model' model.id %}">PRESS HERE</a></p>

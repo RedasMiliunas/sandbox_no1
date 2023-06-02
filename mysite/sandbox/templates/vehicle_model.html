@@ -7,9 +7,18 @@
 <h3><strong>SERVICES & PRICES/per unit (MODEL - {{ vehicle_model.model }}):</strong></h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
+<table class="table table-dark table-hover">
+    <tr>
+        <th>SERVICE:</th>
+        <th>PRICE:</th>
+    </tr>
 {% for x in vehicle_model.models.all %}
-<p>{{ x.product }} : {{ x.price }}</p>
+    <tr>
+        <th><strong>{{ x.product }}</strong></th>
+        <th><strong>{{ x.price }}</strong></th>
+    </tr>
 {% endfor %}
+</table>
 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h4><strong>GET BACK TO MODELS:</strong></h4>
