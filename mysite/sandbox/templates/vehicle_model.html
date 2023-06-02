@@ -3,17 +3,15 @@
 {% block title %}MODELS/PRICES{% endblock %}
 
 {% block content %}
-<h3><strong>MODELS & PRICES:</strong></h3>
-<hr>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h3><strong>SERVICES & PRICES/per unit:</strong></h3>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 {% for x in vehicle_model.models.all %}
 <p>{{ x.product }} : {{ x.price }}</p>
 {% endfor %}
-
-{% for element in model.models.all %}
-
-<p>{{ element.product }} </p>
-<p>{{ element.price }}</p>
-<hr>
-{% endfor %}
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h4><strong>GET BACK TO MODELS:</strong></h4>
+<p><a href="{% url 'models' %}">PRESS HERE</a></p>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
 {% endblock %}
