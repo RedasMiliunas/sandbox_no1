@@ -87,7 +87,7 @@ class VehicleModelDetailView(generic.DetailView):
     template_name = 'vehicle_model.html'
     context_object_name = 'vehicle_model'
 
-class OrderListView(generic.ListView):
+class OrderListView(LoginRequiredMixin, generic.ListView):
     model = Order
     template_name = 'orders.html'
     context_object_name = 'orders'
