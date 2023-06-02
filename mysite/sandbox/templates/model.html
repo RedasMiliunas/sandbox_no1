@@ -21,7 +21,7 @@
 {{ model.description | safe }}
 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-<h4><strong>GET PRICES FOR ALL SERVICES</strong></h4>
+<h4><strong>GET BMW {{ model }} PRICES FOR ALL SERVICES:</strong></h4>
 <a href="{% url 'vehicle_model' model.id %}"><input type="submit" class="btn btn-dark btn-default" value="PRESS HERE!"></a>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 {% endblock %}
