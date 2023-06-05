@@ -134,4 +134,8 @@ class UserProfile(models.Model):
 
 
     def __str__(self):
-        return f'{self.username} profile'
+        return f'{self.user.username} profile'
+
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
