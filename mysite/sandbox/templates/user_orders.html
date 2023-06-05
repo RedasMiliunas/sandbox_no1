@@ -34,12 +34,15 @@
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3><strong>Delayed Orders:</strong></h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<p><sub><strong>Extra info: </strong>If this section is empty - None of Your Orders are Delayed.</sub></p>
 <hr>
-<ol>
+
 {% for element in user_orders %}
     {% if element.is_overdue %}
+    <h5><strong>There are some bad news:</strong></h5>
+    <hr>
+<ol>
 <li>
-
 <p>{{ element.customer }} <a href="{% url 'order' element.pk %}">[{{ element.date }}]</a>; {{ element.status }} : <span class="{% if element.is_overdue %}text-danger{% endif %}">
     {% if not element.is_overdue %}[{{ element.due_back }}] {% else %} [{{ element.due_back }}]
     <p><span class="text-danger">
@@ -50,9 +53,9 @@
     <p>Contact Administration or go to the Order Chat.</p></span></p>{% endif %}</span></p>
     </div>
     </li>
-<hr>
+    <hr>
 </ol>
-
+<hr>
 {% endif %}
 {% endfor %}
 {% endblock %}
