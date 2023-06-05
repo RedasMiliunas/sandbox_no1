@@ -3,9 +3,9 @@
 {% block title %}Service{% endblock %}
 
 {% block content %}
-
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h4><strong> {{ product.name }} </strong></h4>
-<hr>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <p><strong>INFO: </strong>
 <p><strong>Pro tip:</strong> in this Table you can find all prices for various BMW models.</p>
 <hr>
@@ -22,11 +22,9 @@
 {% endfor %}
 </table>
 <hr>
-{% for model in product.products.all %}
-  <hr>
-    <p>{{ model.model }} : {{ model.price }}</p>
-<hr>
-</p>
-{% endfor %}
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h4><strong>GO BACK TO SERVICES:</strong></h4>
+<a href="{% url 'products' %}"><input type="submit" class="btn btn-dark btn-default" value="PRESS HERE!"></a>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
 {% endblock %}

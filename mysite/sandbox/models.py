@@ -95,6 +95,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Order"
         verbose_name_plural = "Orders"
+        ordering = ['-date']
 
 class OrderLine(models.Model):
     order = models.ForeignKey(to='Order', verbose_name='Order', on_delete=models.CASCADE, help_text='Your orderline here', related_name='lines')
