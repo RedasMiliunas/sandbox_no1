@@ -34,4 +34,5 @@ urlpatterns = [
     # path('product_price/', views.ProductPriceListView.as_view(), name='product_price'),
     path('vehicle_model/<int:pk>', views.VehicleModelDetailView.as_view(), name='vehicle_model'),
     path('contacts/', views.contacts, name='contacts'),
+    path('profile/', views.profile, name='profile'),
 ]

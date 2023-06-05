@@ -9,6 +9,7 @@ from django.contrib.auth.forms import User
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
 from .forms import OrderReviewForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -149,3 +150,8 @@ def register(request):
             return redirect('register')
     else:
        return render(request, 'registration/register.html')
+
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
