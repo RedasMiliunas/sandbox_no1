@@ -28,6 +28,7 @@
         <td><strong>{{ user_orders.count }}</strong></td>
     </tr>
 </table>
+<p><small><strong>Pro Tip:</strong> You can ENTER any single Order by pressing on "Order Date".</small></p>
 <hr>
 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -44,20 +45,20 @@
     <p><span class="text-danger">
     <hr>
     <div>
-<h5><strong>ATTENTION!</strong></h5>
+    <h5><strong>ATTENTION!</strong></h5>
     <p>This Order is Overdue!</p>
     <p>Contact Administration or go to the Order Chat.</p></span></p>{% endif %}</span></p>
     </div>
     </li>
+<hr>
+</ol>
     {% else %}
         <div>
     <h5><strong>HAPPY DAYS!</strong></h5>
     <p>None of Your Orders are Delayed!</p>
+            <h1>BLOGAS ELSE: REIKIA SUTVARKYTI</h1>
         </div>
-    {% endif %}
 <hr>
+{% endif %}
 {% endfor %}
-</ol>
-
-
 {% endblock %}
