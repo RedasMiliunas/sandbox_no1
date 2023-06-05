@@ -10,6 +10,7 @@
 <a href="{% url 'order' element.id %}">
 <p>{{ element }}</p>
 </a>
+ <img class="account-img" src="{{element.customer.userprofile.picture.url}}">
 <hr>
   {% endfor %}
 {% else %}
