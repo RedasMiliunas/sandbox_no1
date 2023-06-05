@@ -155,7 +155,13 @@ def register(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        pass
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = UserProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.info(request, f'Profile was successfully UPDATED!')
+            return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = UserProfileUpdateForm(instance=request.user.userprofile)
