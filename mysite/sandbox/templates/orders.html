@@ -5,14 +5,21 @@
 {% block content %}
 {% if user.is_staff %}
 <h3>Our orders:</h3>
+<ol>
   {% for element in orders %}
 <hr>
+
+    <li>
 <a href="{% url 'order' element.id %}">
 <p>{{ element }}</p>
+    <img class="account-img" src="{{element.customer.userprofile.picture.url}}">
+    <p>{{ element.customer.username }}</p>
 </a>
- <img class="account-img" src="{{element.customer.userprofile.picture.url}}">
+    </li>
+
 <hr>
   {% endfor %}
+    </ol>
 {% else %}
 <h3><strong>Not Found: 404 ERROR.</strong></h3>
 <h3><strong>This Information is Forbiden!</strong></h3>
