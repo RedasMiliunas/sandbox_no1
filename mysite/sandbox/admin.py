@@ -26,11 +26,15 @@ class OrderAdmin(admin.ModelAdmin):
 class OrderReviewAdmin(admin.ModelAdmin):
     list_display = ('order', 'date_created', 'commentator', 'comment')
 
+
+class ProductPriceAdmin(admin.ModelAdmin):
+    list_filter = ['product', 'model', ]
+
 # Register your models here.
 
 admin.site.register(Status)
 admin.site.register(Product)
-admin.site.register(ProductPrice)
+admin.site.register(ProductPrice, ProductPriceAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderLine)
 admin.site.register(VehicleModel)
