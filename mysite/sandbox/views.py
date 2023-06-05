@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import User
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
-from .forms import OrderReviewForm
+from .forms import OrderReviewForm, UserUpdateForm, UserProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -154,4 +154,15 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    if request.method == 'POST':
+        pass
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = UserProfileUpdateForm(instance=request.user.userprofile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'profile.html', context=context)

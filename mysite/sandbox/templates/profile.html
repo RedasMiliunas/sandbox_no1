@@ -9,13 +9,33 @@
         </div>
         <br>
         <div class="media-body">
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
           <h2 class="account-heading">USER: {{ user.username }}</h2>
-            <hr>
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+
           <p class="text-secondary">EMAIL: {{ user.email }}</p>
           <p class="text-secondary">Date Joined: {{ user.date_joined }}</p>
             <hr>
         </div>
-
       <!-- FORM HERE -->
+        {% load crispy_forms_tags %}
+      <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<strong>PROFILE INFO:</strong>
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-dark btn-default" type="submit">SUBMIT</button>
+            </div>
+        </form>
+        <hr>
     </div>
 {% endblock %}
