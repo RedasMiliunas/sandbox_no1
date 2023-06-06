@@ -65,7 +65,7 @@
         {% if order.customer == user %}
         <td style="text-align:right">
             <a class="btn btn-dark btn-default" href="{% url 'update_orderline' order.id line.id %}">UPDATE</a>
-            <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
+            <a class="btn btn-danger btn-default" href="{% url 'delete_orderline' order.id line.id %}">DELETE</a>
         </td>
         {% endif %}
     </tr>
