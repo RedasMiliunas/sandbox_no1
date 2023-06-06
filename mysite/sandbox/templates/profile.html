@@ -13,11 +13,11 @@
 
           <h2 class="account-heading">USER: {{ user.username }}</h2>
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-
+            <br>
 
           <p class="text-secondary">EMAIL: {{ user.email }}</p>
           <p class="text-secondary">Date Joined: {{ user.date_joined }}</p>
-            <hr>
+
         </div>
       <!-- FORM HERE -->
         {% load crispy_forms_tags %}
@@ -27,8 +27,8 @@
                 <legend class="border-bottom mb-4">
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <strong>PROFILE INFO:</strong>
-                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-</legend>
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray"></legend>
+                <br>
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
             </fieldset>
@@ -36,6 +36,7 @@
                 <button class="btn btn-dark btn-default" type="submit">UPDATE</button>
             </div>
         </form>
+        <br>
         <hr>
     </div>
 {% endblock %}
