@@ -52,6 +52,9 @@
         <th>Price:</th>
         <th>Quantity:</th>
         <th>SUM:</th>
+        {% if order.customer == user %}
+        <th></th>
+        {% endif %}
     </tr>
 {% for line in order.lines.all %}
     <tr>
@@ -59,6 +62,12 @@
         <td>{{ line.product_price }}</td>
         <td>{{ line.qty }}</td>
         <td>{{ line.sum_for }}</td>
+        {% if order.customer == user %}
+        <td style="text-align:right">
+            <a class="btn btn-dark btn-default" href="{% url 'update_orderline' order.id line.id %}">UPDATE</a>
+            <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
+        </td>
+        {% endif %}
     </tr>
 {% endfor %}
     <tr>
@@ -66,6 +75,9 @@
         <td></td>
         <td><strong>TOTAL: </strong></td>
         <td>{{ order.total }}</td>
+        {% if order.customer == user %}
+        <td></td>
+        {% endif %}
     </tr>
 </table>
 <br>
