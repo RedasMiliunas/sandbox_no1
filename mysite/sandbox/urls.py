@@ -33,6 +33,10 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     # path('product_price/', views.ProductPriceListView.as_view(), name='product_price'),
     path('vehicle_model/<int:pk>', views.VehicleModelDetailView.as_view(), name='vehicle_model'),
+    # path('user_orders/<int:pk>', views.UserOrderDetailView.as_view(), name='user_order'),
+    path('user_orders/new', views.OrderCreateView.as_view(), name='order_new'),
+    path('orders/<int:pk>/update', views.OrderUpdateView.as_view(), name='order_update'),
+    path('orders/<int:pk>/delete', views.OrderDeleteView.as_view(), name='order_delete'),
     path('contacts/', views.contacts, name='contacts'),
     path('profile/', views.profile, name='profile'),
 ]

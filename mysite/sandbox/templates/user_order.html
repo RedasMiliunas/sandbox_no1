@@ -1,31 +1,28 @@
 {% extends 'base.html' %}
 
-{% block title %}MY ORDERS{% endblock %}
+{% block title %}MY ORDER{% endblock %}
 
 {% block content %}
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-<h3><strong>My Orders Table:</strong></h3>
+<h3><strong>Single Order:</strong></h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <table class="table table-dark table-hover">
     <tr>
         <th>Username:</th>
-        <th>Model:</th>
         <th>Order Date:</th>
         <th>Status:</th>
         <th>Due Date:</th>
     </tr>
-{% for element in user_orders %}
+
     <tr>
         <td>{{ element.customer }}</td>
-        <td>{{ element.model }}</td>
         <td><a href="{% url 'order' element.pk %}">[{{ element.date }}]</a></td>
         <td>{{ element.status }}</td>
         <td><span class="{% if element.is_overdue %}text-danger{% endif %}">[{{ element.due_back }}]</span></td>
     </tr>
-{% endfor %}
+
     <tr>
         <td><strong>ORDERS TOTAL: </strong></td>
-        <td></td>
         <td></td>
         <td></td>
         <td><strong>{{ user_orders.count }}</strong></td>
@@ -33,8 +30,7 @@
 </table>
 <p><small><strong>Pro Tip:</strong> You can ENTER any single Order by pressing on "Order Date".</small></p>
 <hr>
-<a href="{% url 'order_new' %}"><input type="submit" class="btn btn-dark btn-default" value="ADD NEW ORDER!"></a>
-<hr>
+
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3><strong>Delayed Orders:</strong></h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">

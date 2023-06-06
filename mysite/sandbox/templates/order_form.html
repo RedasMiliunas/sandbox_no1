@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}ORDER CREATE/UPDATE{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+    <div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                <strong>ORDER CREATE/UPDATE</strong>
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            </legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <a href=""><button class="btn btn-dark btn-default" type="submit">SAVE</button></a>
+        </div>
+    </form>
+    </div>
+
+
+{% endblock %}

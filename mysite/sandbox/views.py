@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.views.generic.edit import FormMixin
 from .forms import OrderReviewForm, UserUpdateForm, UserProfileUpdateForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 # Create your views here.
@@ -88,43 +89,6 @@ class VehicleModelDetailView(generic.DetailView):
     template_name = 'vehicle_model.html'
     context_object_name = 'vehicle_model'
 
-class OrderListView(LoginRequiredMixin, generic.ListView):
-    model = Order
-    template_name = 'orders.html'
-    context_object_name = 'orders'
-
-
-class OrderDetailView(FormMixin, generic.DetailView):
-    model = Order
-    template_name = 'order.html'
-    context_object_name = 'order'
-    form_class = OrderReviewForm
-
-    def get_success_url(self):
-        return reverse('order', kwargs={'pk': self.object.id})
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
-# galima tiesiog Generate form_valid ir return'e palikti kaip buna
-    def form_valid(self, form):
-        form.instance.order = self.object
-        form.instance.commentator = self.request.user
-        form.save()
-        return super(OrderDetailView, self).form_valid(form)
-
-class UserOrdersListView(LoginRequiredMixin, generic.ListView):
-    model = Order
-    template_name = 'user_orders.html'
-    context_object_name = 'user_orders'
-
-    def get_queryset(self):
-        return Order.objects.filter(customer=self.request.user)
 
 @csrf_protect
 def register(request):
@@ -172,3 +136,117 @@ def profile(request):
     }
 
     return render(request, 'profile.html', context=context)
+
+
+class OrderListView(LoginRequiredMixin, generic.ListView):
+    model = Order
+    template_name = 'orders.html'
+    context_object_name = 'orders'
+
+
+class OrderDetailView(FormMixin, generic.DetailView):
+    model = Order
+    template_name = 'order.html'
+    context_object_name = 'order'
+    form_class = OrderReviewForm
+
+    def get_success_url(self):
+        return reverse('order', kwargs={'pk': self.object.id})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+# galima tiesiog Generate form_valid ir return'e palikti kaip buna
+    def form_valid(self, form):
+        form.instance.order = self.object
+        form.instance.commentator = self.request.user
+        form.save()
+        return super(OrderDetailView, self).form_valid(form)
+
+class UserOrdersListView(LoginRequiredMixin, generic.ListView):
+    model = Order
+    template_name = 'user_orders.html'
+    context_object_name = 'user_orders'
+
+    def get_queryset(self):
+        return Order.objects.filter(customer=self.request.user)
+
+class UserOrderDetailView(LoginRequiredMixin, generic.DetailView):
+    model = OrderLine
+    template_name = 'user_order.html'
+    context_object_name = 'user_order'
+
+
+class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Order
+    fields = ['model', 'due_back', 'status', ]
+    success_url = '/user_orders/'
+    template_name = 'order_form.html'
+
+
+    def form_valid(self, form):
+        form.instance.customer = self.request.user
+        return super().form_valid(form)
+
+
+
+class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView):
+    model = Order
+    fields = ['model', 'due_back', 'status', ]
+
+    template_name = 'order_form.html'
+
+    def get_success_url(self):
+        return reverse('order', kwargs={'pk': self.object.id})    #todo reikia 2nd ID (NE!) BUTINAI 'pk', o ne 'id'!!
+    def form_valid(self, form):
+        form.instance.customer = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        return self.get_object().customer == self.request.user
+
+#
+# from django.contrib.auth.mixins import UserPassesTestMixin
+#
+# def is_staff_or_superuser(user):
+#     return user.is_staff or user.is_superuser
+#
+# class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+#     model = Order
+#     fields = ['model']
+#     success_url = '/user_orders/'
+#     template_name = 'order_form.html'
+#
+#     def form_valid(self, form):
+#         form.instance.customer = self.request.user
+#         return super().form_valid(form)
+#
+#
+# class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView):
+#     model = Order
+#     fields = ['model', 'due_back', 'status']
+#     template_name = 'order_form.html'
+#
+#     def get_success_url(self):
+#         return reverse('order', kwargs={'pk': self.object.id})
+#
+#     def form_valid(self, form):
+#         form.instance.customer = self.request.user
+#         return super().form_valid(form)
+#
+#     def test_func(self):
+#         return is_staff_or_superuser(self.request.user)
+
+class OrderDeleteView(UserPassesTestMixin, LoginRequiredMixin, generic.DeleteView):
+    model = Order
+    context_object_name = 'order'
+    template_name = 'order_delete.html'
+    success_url = '/user_orders/'
+
+    def test_func(self):
+        return self.get_object().customer == self.request.user
