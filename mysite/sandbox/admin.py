@@ -17,10 +17,10 @@ class OrderCommentInLine(admin.TabularInline):
     extra = 0
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['customer', 'date', 'status', 'due_back']
+    list_display = ['customer', 'model', 'date', 'status', 'due_back']
     inlines = [OrderLineInline, OrderCommentInLine]
-    list_filter = ['status', 'customer', 'date', 'due_back']
-    list_editable = ['status', 'due_back',]
+    list_filter = ['status', 'customer', 'model', 'date', 'due_back']
+    list_editable = ['status', 'due_back', ]
 
 
 class OrderReviewAdmin(admin.ModelAdmin):

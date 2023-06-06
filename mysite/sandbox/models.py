@@ -90,7 +90,7 @@ class Order(models.Model):
         return self.due_back and date.today() > self.due_back
 
     def __str__(self):
-        return f'{self.customer} [{self.date}] - ({self.status} [{self.due_back}])'
+        return f'{self.customer} : {self.model} [{self.date}] - ({self.status} [{self.due_back}])'
 
     class Meta:
         verbose_name = "Order"
@@ -104,7 +104,7 @@ class OrderLine(models.Model):
 
 
     def __str__(self):
-        return f'{self.order}: [{self.product} x {self.qty}]'
+        return f'{self.order.customer} ({self.order.model}): [{self.product}:    x{self.qty}]'
 
     def product_price(self):
         return ProductPrice.objects.filter(model=self.order.model, product=self.product).first().price
