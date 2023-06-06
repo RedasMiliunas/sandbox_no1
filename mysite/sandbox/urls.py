@@ -35,8 +35,10 @@ urlpatterns = [
     path('vehicle_model/<int:pk>', views.VehicleModelDetailView.as_view(), name='vehicle_model'),
     # path('user_orders/<int:pk>', views.UserOrderDetailView.as_view(), name='user_order'),
     path('user_orders/new', views.OrderCreateView.as_view(), name='order_new'),
+    # path('user_orders/custom_new', views.CustomOrderCreateView.as_view(), name='custom_new'),
     path('orders/<int:pk>/update', views.OrderUpdateView.as_view(), name='order_update'),
     path('orders/<int:pk>/delete', views.OrderDeleteView.as_view(), name='order_delete'),
+    path('orders/<int:pk>/new_orderline', views.OrderLineCreateView.as_view(), name='new_orderline'),
     path('contacts/', views.contacts, name='contacts'),
     path('profile/', views.profile, name='profile'),
 ]

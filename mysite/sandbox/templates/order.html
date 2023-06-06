@@ -24,10 +24,10 @@
 <br>
 {% endif %}
 <hr>
-{% if object.customer == user %}
+{% if order.customer == user %}
     <div>
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'order_update' order.id %}">UPDATE</a>
-        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'order_delete' order.id %}">DELETE</a>
+        <a class="btn btn-dark btn-default" href="{% url 'order_update' order.id %}">UPDATE</a>
+        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
     </div>
 {% endif %}
 <hr>
@@ -69,6 +69,13 @@
     </tr>
 </table>
 <br>
+<hr>
+{% if order.customer == user %}
+    <div>
+        <a class="btn btn-dark btn-default" href="{% url 'new_orderline' order.id %}">ADD ORDERLINE</a>
+    </div>
+{% endif %}
+<hr>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3>Comments:</h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">

@@ -183,19 +183,34 @@ class UserOrderDetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = 'user_order'
 
 
-class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+# ===================================================================================
+# class CustomOrderCreateView( LoginRequiredMixin, generic.CreateView):
+#     model = Order
+#     success_url = '/user_orders/'
+#     template_name = 'order_form.html'
+#     form_class = CustomOrderForm
+#
+#     def form_valid(self, form):
+#         form.instance.customer = self.request.user
+#         return super().form_valid(form)
+#
+#PABANDYTI SITA!: (Video 1 val.)
+#     def test_func(self):
+#         authorized_customer = Order.customer.user.get(pk=self.kwargs['pk'])
+#         return authorized_customer == self.request.user
+# ===================================================================================
+class OrderCreateView( LoginRequiredMixin, generic.CreateView):
     model = Order
     # fields = ['model', 'due_back', 'status', ]
     success_url = '/user_orders/'
     template_name = 'order_form.html'
     form_class = OrderForm
-
+    # form_class1 = CustomOrderForm
 
 
     def form_valid(self, form):
         form.instance.customer = self.request.user
         return super().form_valid(form)
-
 
 
 class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView):
@@ -214,7 +229,7 @@ class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateVie
     def test_func(self):
         return self.get_object().customer == self.request.user
 
-#
+# ===================================================================================
 # from django.contrib.auth.mixins import UserPassesTestMixin
 #
 # def is_staff_or_superuser(user):
@@ -245,7 +260,7 @@ class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateVie
 #
 #     def test_func(self):
 #         return is_staff_or_superuser(self.request.user)
-
+# ===================================================================================
 class OrderDeleteView(UserPassesTestMixin, LoginRequiredMixin, generic.DeleteView):
     model = Order
     context_object_name = 'order'
@@ -254,3 +269,22 @@ class OrderDeleteView(UserPassesTestMixin, LoginRequiredMixin, generic.DeleteVie
 
     def test_func(self):
         return self.get_object().customer == self.request.user
+
+
+# ===================================================================================
+
+class OrderLineCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
+    model = OrderLine
+    fields = ['product', 'qty']
+    template_name = 'orderline_form.html'
+
+    def test_func(self):
+        order = Order.objects.get(pk=self.kwargs['pk'])
+        return order.customer == self.request.user
+
+    def get_success_url(self):
+        return reverse('order', kwargs={'pk': self.kwargs['pk']})
+
+    def form_valid(self, form):
+        form.instance.order = Order.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
