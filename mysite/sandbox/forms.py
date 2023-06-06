@@ -1,6 +1,7 @@
 from django import forms
-from .models import OrderComment, UserProfile
+from .models import OrderComment, UserProfile, Order
 from django.contrib.auth.models import User
+
 
 class OrderReviewForm(forms.ModelForm):
     class Meta:
@@ -19,3 +20,15 @@ class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['picture', ]
+
+
+
+class MyDateTimeInput(forms.DateInput):
+    input_type = 'date'
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['model', 'due_back', 'status', ]
+        widgets = {'due_back': MyDateTimeInput}

@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
@@ -63,9 +65,9 @@ class ProductPrice(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(to=User, verbose_name='User', on_delete=models.SET_NULL, null=True, blank=True, help_text='Pick your USER here')
-    date = models.DateTimeField(verbose_name='Date n Time', auto_now_add=True, help_text='Pick your date here')
+    date = models.DateTimeField(verbose_name='Date n Time', auto_now_add=True, help_text='Pick your date here', )
     status = models.ForeignKey(to='Status', verbose_name='Status', on_delete=models.SET_NULL, null=True, help_text='Pick your status here', default=6)
-    due_back = models.DateField(verbose_name='Will be available', null=True, blank=True)
+    due_back = models.DateField(verbose_name='Will be available', null=True, blank=True, )
     model = models.ForeignKey(to='VehicleModel', verbose_name='Model', on_delete=models.SET_NULL, null=True,
                               blank=True, )
 

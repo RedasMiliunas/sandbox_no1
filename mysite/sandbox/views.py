@@ -8,9 +8,10 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import User
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
-from .forms import OrderReviewForm, UserUpdateForm, UserProfileUpdateForm
+from .forms import OrderReviewForm, UserUpdateForm, UserProfileUpdateForm, OrderForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
+from datetime import date
 
 
 # Create your views here.
@@ -184,9 +185,11 @@ class UserOrderDetailView(LoginRequiredMixin, generic.DetailView):
 
 class OrderCreateView(LoginRequiredMixin, generic.CreateView):
     model = Order
-    fields = ['model', 'due_back', 'status', ]
+    # fields = ['model', 'due_back', 'status', ]
     success_url = '/user_orders/'
     template_name = 'order_form.html'
+    form_class = OrderForm
+
 
 
     def form_valid(self, form):
@@ -197,8 +200,9 @@ class OrderCreateView(LoginRequiredMixin, generic.CreateView):
 
 class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView):
     model = Order
-    fields = ['model', 'due_back', 'status', ]
-
+    # fields = ['model', 'due_back', 'status', ]
+    form_class = OrderForm
+    # success_url = '/user_orders/'
     template_name = 'order_form.html'
 
     def get_success_url(self):
