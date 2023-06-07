@@ -12,10 +12,22 @@
   </a>
 <hr>
   {% endfor %}
+
+{% elif models %}
+{% for element in models %}
+<hr>
+<a href="{% url 'model' element.id %}">
+<p><strong> {{ element }} </strong></p>
+  </a>
+<hr>
+  {% endfor %}
+
 {% else %}
 <hr>
 <h4>No Results for '{{ query }}' were found.</h4>
 <hr>
+
 {% endif %}
+
 
 {% endblock %}
