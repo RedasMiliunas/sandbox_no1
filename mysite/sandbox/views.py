@@ -202,10 +202,13 @@ class UserOrderDetailView(LoginRequiredMixin, generic.DetailView):
 class OrderCreateView( LoginRequiredMixin, generic.CreateView):
     model = Order
     # fields = ['model', 'due_back', 'status', ]
-    success_url = '/user_orders/'
+    # success_url = '/user_orders/'
     template_name = 'order_form.html'
     form_class = OrderForm
     # form_class1 = CustomOrderForm
+
+    def get_success_url(self):
+        return reverse('order', kwargs={'pk': self.object.id})
 
 
     def form_valid(self, form):
