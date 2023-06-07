@@ -35,9 +35,9 @@
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 {% if products %}
 <h4><strong>Found Services:</strong></h4>
-<hr>
+<br>
   {% for element in products %}
-<hr>
+
 <a href="{% url 'product' element.id %}">
 <p><strong> {{ element }} </strong></p>
   </a>
@@ -45,23 +45,28 @@
   {% endfor %}
 
 {% else %}
-<hr>
-<h4>No Results for '{{ query }}' were found.</h4>
+<h4><strong>Found Services:</strong></h4>
+<br>
+<h5>No <strong>Services</strong> for '{{ query }}' were found.</h5>
 <hr>
 
 {% endif %}
 
 {% if models %}
 <h4><strong>Found Models:</strong></h4>
-<hr>
+<br>
 {% for element in models %}
-<hr>
+
 <a href="{% url 'model' element.id %}">
 <p><strong> {{ element }} </strong></p>
   </a>
 <hr>
   {% endfor %}
-
+{% else %}
+<h4><strong>Found Models:</strong></h4>
+<br>
+<h5>No <strong>Models</strong> for '{{ query }}' were found.</h5>
+<hr>
   {% endif %}
 
 {% endblock %}
