@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import User
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
-from .forms import OrderReviewForm, UserUpdateForm, UserProfileUpdateForm, OrderForm
+from .forms import OrderReviewForm, UserUpdateForm, UserProfileUpdateForm, OrderForm, CustomOrderForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from datetime import date
@@ -199,12 +199,16 @@ class UserOrderDetailView(LoginRequiredMixin, generic.DetailView):
 #         authorized_customer = Order.customer.user.get(pk=self.kwargs['pk'])
 #         return authorized_customer == self.request.user
 # ===================================================================================
+
+def is_staff_or_superuser(user):
+    return user.is_staff or user.is_superuser
+
 class OrderCreateView( LoginRequiredMixin, generic.CreateView):
     model = Order
     # fields = ['model', 'due_back', 'status', ]
     # success_url = '/user_orders/'
     template_name = 'order_form.html'
-    form_class = OrderForm
+    form_class = CustomOrderForm
     # form_class1 = CustomOrderForm
 
     def get_success_url(self):
@@ -214,6 +218,9 @@ class OrderCreateView( LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.customer = self.request.user
         return super().form_valid(form)
+
+    # def get_queryset(self):
+    #     return OrderForm.fields.filter(is_staff_or_superuser(self.request.user)).first()
 
 
 class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView):
@@ -230,7 +237,8 @@ class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateVie
         return super().form_valid(form)
 
     def test_func(self):
-        return self.get_object().customer == self.request.user
+        return is_staff_or_superuser(self.request.user)
+        # return self.get_object().customer == self.request.user
 
 # ===================================================================================
 # from django.contrib.auth.mixins import UserPassesTestMixin

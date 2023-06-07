@@ -25,10 +25,16 @@
 {% endif %}
 <hr>
 {% if order.customer == user %}
+{% if user.is_staff %}
     <div>
         <a class="btn btn-dark btn-default" href="{% url 'order_update' order.id %}">UPDATE</a>
         <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
     </div>
+{% else %}
+    <div>
+        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
+    </div>
+{% endif %}
 {% endif %}
 <hr>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">

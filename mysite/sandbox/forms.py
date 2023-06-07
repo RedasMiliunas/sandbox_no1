@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 
+
 class OrderReviewForm(forms.ModelForm):
     class Meta:
         model = OrderComment
@@ -33,9 +34,11 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['model', 'due_back', 'status', ]
+        list_editable = ['model']
         widgets = {'due_back': MyDateTimeInput}
 
-# class CustomOrderForm(forms.ModelForm):
-#     class Meta:
-#         model = Order
-#         fields = ['model']
+
+class CustomOrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['model']
