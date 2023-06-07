@@ -70,9 +70,11 @@ def model(request, model_id):
 
 def search(request):
     query = request.GET.get('query')
+    # results = ProductPrice.objects.filter(Q(product__name__icontains=query) | Q(model__model__icontains=query))
     search_results = Product.objects.filter(Q(name__icontains=query))
     search_results2 = VehicleModel.objects.filter(Q(model__icontains=query))
     context = {
+        # 'results': results,
         'products': search_results,
         'models': search_results2,
         'query': query,

@@ -3,20 +3,42 @@
 {% block title %}Search Results{% endblock %}
 
 {% block content %}
+
+{% comment 'Nereikalinga kodo dalis' %}
+<!--<h3><strong>Search Results for '{{ query }}' are:</strong></h3>-->
+<!--{% if products %}-->
+<!--  {% for element in products %}-->
+<!--<hr>-->
+<!--<a href="{% url 'product' element.id %}">-->
+<!--<p><strong> {{ element }} </strong></p>-->
+<!--  </a>-->
+<!--<hr>-->
+<!--  {% endfor %}-->
+<!--{% elif models %}-->
+<!--{% for element in models %}-->
+<!--<hr>-->
+<!--<a href="{% url 'model' element.id %}">-->
+<!--<p><strong> {{ element }} </strong></p>-->
+<!--  </a>-->
+<!--<hr>-->
+<!--  {% endfor %}-->
+<!--{% else %}-->
+<!--<hr>-->
+<!--<h4>No Results for '{{ query }}' were found.</h4>-->
+<!--<hr>-->
+<!--{% endif %}-->
+{% endcomment%}
+
+
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3><strong>Search Results for '{{ query }}' are:</strong></h3>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 {% if products %}
+<h4><strong>Found Services:</strong></h4>
+<hr>
   {% for element in products %}
 <hr>
 <a href="{% url 'product' element.id %}">
-<p><strong> {{ element }} </strong></p>
-  </a>
-<hr>
-  {% endfor %}
-
-{% elif models %}
-{% for element in models %}
-<hr>
-<a href="{% url 'model' element.id %}">
 <p><strong> {{ element }} </strong></p>
   </a>
 <hr>
@@ -29,5 +51,17 @@
 
 {% endif %}
 
+{% if models %}
+<h4><strong>Found Models:</strong></h4>
+<hr>
+{% for element in models %}
+<hr>
+<a href="{% url 'model' element.id %}">
+<p><strong> {{ element }} </strong></p>
+  </a>
+<hr>
+  {% endfor %}
+
+  {% endif %}
 
 {% endblock %}
