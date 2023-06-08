@@ -35,6 +35,9 @@ class Status(models.Model):
 class Product(models.Model):
     name = models.CharField(verbose_name='Product', max_length=50, help_text='Pick your product here')
     # model = models.ForeignKey(to='VehicleModel', verbose_name='Model', on_delete=models.SET_NULL, null=True, blank=True, related_name='models')
+    srvc_photo = models.ImageField(verbose_name='Photo', upload_to='photos', null=True, blank=True)
+    srvc_description = HTMLField(verbose_name='Description', max_length=3000, default='')
+
 
     def __str__(self):
         return self.name

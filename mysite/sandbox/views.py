@@ -34,7 +34,7 @@ def contacts(request):
 
 
 def products(request):
-    paginator = Paginator(Product.objects.all(), 4)
+    paginator = Paginator(Product.objects.all(), 3)
     page_number = request.GET.get('page')
     paged_services = paginator.get_page(page_number)
     context = {

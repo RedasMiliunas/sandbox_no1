@@ -3,6 +3,36 @@
 {% block title %}SERVICES{% endblock %}
 
 {% block content %}
+
+
+{% load static %}
+<h3><strong>Available Services:</strong></h3>
+<hr>
+{% if products %}
+<div class="row">
+  {% for element in products %}
+    <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+            {% if element.srvc_photo %}
+              <img src="{{ element.srvc_photo.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{ element.name }}</h6>
+              <p class="card-text"><a href="{{ element.id }}">About</a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p>No Available Models at the moment.</p>
+<hr>
+{% endif %}
+
+{% comment 'Nereikalinga kodo dalis' %}
+
 <h3>Our services:</h3>
   {% for element in products %}
 <hr>
@@ -11,6 +41,7 @@
   </a>
 <hr>
   {% endfor %}
+{% endcomment%}
 <div class="container pages">
     <nav aria-label="...">
         {% if products.has_other_pages %}
