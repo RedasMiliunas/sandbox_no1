@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Product, VehicleModel, ProductPrice, Order, OrderLine, Status
+from .models import Product, VehicleModel, ProductPrice, Order, OrderLine, Status, Contacts, ContactsVar
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
@@ -30,7 +30,12 @@ def homepage(request):
     return render(request, 'homepage.html', context=context)
 
 def contacts(request):
-    return render(request, 'contacts.html')
+    context = {
+        'main_info': Contacts.objects.all(),
+        # 'main_info': get_object_or_404(Contacts, pk=product_id),
+        'extra_info': ContactsVar.objects.all(),
+    }
+    return render(request, 'contacts.html', context=context)
 
 
 def products(request):

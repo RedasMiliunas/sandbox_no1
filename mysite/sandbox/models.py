@@ -8,6 +8,29 @@ from PIL import Image
 
 # Create your models here.
 
+class Contacts(models.Model):
+    company_info = HTMLField(verbose_name='Description', max_length=3000, default='')
+    extra_info = HTMLField(verbose_name='Extra Info', max_length=1000, default='', null=True, blank=True)
+
+    # department = models.CharField(verbose_name='Department', max_length=30, help_text='Enter Department here')
+    # email = models.CharField(verbose_name='Email', max_length=30, help_text='Enter Email here')
+    # phone = models.CharField(verbose_name='Phone', max_length=20, help_text='Enter Phone here')
+
+    class Meta:
+        verbose_name = "Contact"
+        verbose_name_plural = "Contacts"
+
+
+class ContactsVar(models.Model):
+    department = models.CharField(verbose_name='Department', max_length=30, help_text='Enter Department here')
+    email = models.CharField(verbose_name='Email', max_length=30, help_text='Enter Email here')
+    phone = models.CharField(verbose_name='Phone', max_length=20, help_text='Enter Phone here')
+    # other_info = models.ForeignKey(to='Contacts', verbose_name='Inside info', on_delete=models.SET_NULL, null=True, blank=True, related_name='contacts')
+    class Meta:
+        verbose_name = "Inside"
+        verbose_name_plural = "Insides"
+
+
 class VehicleModel(models.Model):
     model = models.CharField(verbose_name='Model', max_length=20, help_text="Vehicle's model")
     photo = models.ImageField(verbose_name='Photo', upload_to='photos', null=True, blank=True)
@@ -153,3 +176,4 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
+
