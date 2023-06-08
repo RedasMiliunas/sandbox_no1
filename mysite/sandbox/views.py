@@ -234,8 +234,10 @@ class OrderUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateVie
 
     def get_success_url(self):
         return reverse('order', kwargs={'pk': self.object.id})    #todo reikia 2nd ID (NE!) BUTINAI 'pk', o ne 'id'!!
+
     def form_valid(self, form):
         form.instance.customer = self.request.user
+        # if self.request.user.is_staff:
         return super().form_valid(form)
 
     def test_func(self):

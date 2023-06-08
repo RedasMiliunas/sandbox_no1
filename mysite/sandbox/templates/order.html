@@ -3,6 +3,8 @@
 {% block title %}ORDER{% endblock %}
 
 {% block content %}
+{% if user.is_staff %}
+
 {% if order.is_overdue %}
 <hr style="height:2px;border-width:0;color:gray;background-color:red">
 <h3>Single order:</h3>
@@ -23,20 +25,168 @@
 <p><strong>Deadline: </strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">[{{ order.due_back }}]</span> </p>
 <br>
 {% endif %}
+
+
+
+
+<div>
+    <a class="btn btn-dark btn-default" href="{% url 'order_update' order.id %}">UPDATE</a>
+    <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
+</div>
+
+
+
+
+{% comment 'Nereikalinga kodo dalis' %}
+<!--{% if order.customer == user %}-->
+<!--{% if user.is_staff %}-->
+<!--    <div>-->
+<!--        <a class="btn btn-dark btn-default" href="{% url 'order_update' order.id %}">UPDATE</a>-->
+<!--        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>-->
+<!--    </div>-->
+<!--{% else %}-->
+<!--    <div>-->
+<!--        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>-->
+<!--    </div>-->
+<!--{% endif %}-->
+<!--{% endif %}-->
+{% endcomment%}
+
+
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h3>Booked services:</h3>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+{% for line in order.lines.all %}
+
+<p><strong>{{ line.product }} {% for element in line.product.products.all %}{% endfor %}</strong>({{line.product_price}})<strong> - {{ line.qty }}; SUM: </strong>({{ line.sum_for }})</p>
+
+{% endfor %}
 <hr>
-{% if order.customer == user %}
-{% if user.is_staff %}
+<p><strong>TOTAL SUM:</strong> {{ order.total }} </p>
+<br>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h3>SUM UP:</h3>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+<table class="table table-dark table-hover">
+    <tr>
+        <th>Service:</th>
+        <th>Price:</th>
+        <th>Quantity:</th>
+        <th>SUM:</th>
+
+        <th></th>
+
+    </tr>
+{% for line in order.lines.all %}
+    <tr>
+        <td>{{ line.product }}</td>
+        <td>{{ line.product_price }}</td>
+        <td>{{ line.qty }}</td>
+        <td>{{ line.sum_for }}</td>
+
+        <td style="text-align:right">
+            <a class="btn btn-dark btn-default" href="{% url 'update_orderline' order.id line.id %}">UPDATE</a>
+            <a class="btn btn-danger btn-default" href="{% url 'delete_orderline' order.id line.id %}">DELETE</a>
+        </td>
+
+    </tr>
+{% endfor %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td><strong>TOTAL: </strong></td>
+        <td>{{ order.total }}</td>
+
+        <td></td>
+
+    </tr>
+</table>
+<br>
+
+
     <div>
-        <a class="btn btn-dark btn-default" href="{% url 'order_update' order.id %}">UPDATE</a>
-        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
+        <a class="btn btn-dark btn-default" href="{% url 'new_orderline' order.id %}">ADD ORDERLINE</a>
     </div>
+
+
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h3>Comments:</h3>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+  {% if user.is_authenticated %}
+  <div class="fieldWrapper">
+    <hr><br/>
+    <h4>Comment here:</h4>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.comment }}</br>
+      <input type="submit" class="btn btn-dark btn-default" value="COMMENT">
+    </form>
+  </div>
+  {% endif %}
+<br>
+  {% if order.comments.all %}
+    {% for comment in order.comments.all %}
+      <hr>
+      <strong>{{ comment.commentator }}</strong>, <em>{{ comment.date_created}}</em>
+      <p>{{ comment.comment }}</p>
+    {% endfor %}
+  {% else %}
+    <p>No Comments on this Order.</p>
+  {% endif %}
+
+<hr>
+
 {% else %}
+{% if order.customer == user %}
+{% if order.is_overdue %}
+<hr style="height:2px;border-width:0;color:gray;background-color:red">
+<h3>Single order:</h3>
+<hr style="height:2px;border-width:0;color:gray;background-color:red">
+<p><strong>Customer name: </strong> {{ order.customer }} </p>
+<p><strong>Date: </strong> {{ order.date }} </p>
+<p><strong>Order status: </strong> {{ order.status }} </p>
+<p><strong>Deadline: </strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">[{{ order.due_back }}]</span> </p>
+<br>
+{% else %}
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h3>Single order:</h3>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<p><strong>Customer name: </strong> {{ order.customer }} </p>
+<p><strong>Model: </strong> {{ order.model }} </p>
+<p><strong>Date: </strong> {{ order.date }} </p>
+<p><strong>Order status: </strong> {{ order.status }} </p>
+<p><strong>Deadline: </strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">[{{ order.due_back }}]</span> </p>
+<br>
+{% endif %}
+
+
+
+
+
     <div>
         <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
     </div>
-{% endif %}
-{% endif %}
-<hr>
+
+
+
+
+{% comment 'Nereikalinga kodo dalis' %}
+<!--{% if order.customer == user %}-->
+<!--{% if user.is_staff %}-->
+<!--    <div>-->
+<!--        <a class="btn btn-dark btn-default" href="{% url 'order_update' order.id %}">UPDATE</a>-->
+<!--        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>-->
+<!--    </div>-->
+<!--{% else %}-->
+<!--    <div>-->
+<!--        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>-->
+<!--    </div>-->
+<!--{% endif %}-->
+<!--{% endif %}-->
+{% endcomment%}
+
+
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3>Booked services:</h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -87,13 +237,13 @@
     </tr>
 </table>
 <br>
-<hr>
+
 {% if order.customer == user %}
     <div>
         <a class="btn btn-dark btn-default" href="{% url 'new_orderline' order.id %}">ADD ORDERLINE</a>
     </div>
 {% endif %}
-<hr>
+
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3>Comments:</h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -119,6 +269,10 @@
     <p>No Comments on this Order.</p>
   {% endif %}
 <hr>
+{% else %}
+<h3><strong>Not Found: 404 ERROR.</strong></h3>
+<h3><strong>This Information is Forbiden!</strong></h3>
 
-
+{% endif %}
+{% endif %}
 {% endblock %}
