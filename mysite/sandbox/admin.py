@@ -27,11 +27,20 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class OrderReviewAdmin(admin.ModelAdmin):
-    list_display = ('order', 'date_created', 'commentator', 'comment')
+    list_display = ['order', 'date_created', 'commentator', 'comment']
 
 
 class ProductPriceAdmin(admin.ModelAdmin):
     list_filter = ['product', 'model', ]
+
+# class ContactsVarInLine(admin.TabularInline):
+#     model = ContactsVar
+# #     extra = 0
+
+class ContactsVarAdmin(admin.ModelAdmin):
+    list_display = ['department', 'email', 'phone', ]
+    list_editable = ['email', 'phone', ]
+
 
 # Register your models here.
 
@@ -44,4 +53,4 @@ admin.site.register(VehicleModel)
 admin.site.register(OrderComment, OrderReviewAdmin)
 admin.site.register(UserProfile, )
 admin.site.register(Contacts, )
-admin.site.register(ContactsVar, )
+admin.site.register(ContactsVar, ContactsVarAdmin)
