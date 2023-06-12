@@ -45,7 +45,7 @@
     {% if element.is_overdue %}
     <h5><strong>There are some bad news:</strong></h5>
     <hr>
-<ol>
+<ul>
 <li>
 <p>{{ element.customer }} <a href="{% url 'order' element.pk %}">[{{ element.date }}]</a>; {{ element.status }} : <span class="{% if element.is_overdue %}text-danger{% endif %}">
     {% if not element.is_overdue %}[{{ element.due_back }}] {% else %} [{{ element.due_back }}]
@@ -58,7 +58,7 @@
     </div>
     </li>
     <hr>
-</ol>
+</ul>
 <hr>
 {% endif %}
 {% endfor %}
