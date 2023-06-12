@@ -161,31 +161,9 @@
 <br>
 {% endif %}
 
-
-
-
-
     <div>
         <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
     </div>
-
-
-
-
-{% comment 'Nereikalinga kodo dalis' %}
-<!--{% if order.customer == user %}-->
-<!--{% if user.is_staff %}-->
-<!--    <div>-->
-<!--        <a class="btn btn-dark btn-default" href="{% url 'order_update' order.id %}">UPDATE</a>-->
-<!--        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>-->
-<!--    </div>-->
-<!--{% else %}-->
-<!--    <div>-->
-<!--        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>-->
-<!--    </div>-->
-<!--{% endif %}-->
-<!--{% endif %}-->
-{% endcomment%}
 
 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -242,6 +220,7 @@
 {% if order.customer == user %}
     <div>
         <a class="btn btn-dark btn-default" href="{% url 'new_orderline' order.id %}">ADD ORDERLINE</a>
+        <a class="float-right btn btn-dark btn-default" href="{% url 'pdf_report' order.id %}">DOWNLOAD PDF</a>
     </div>
 {% endif %}
 
