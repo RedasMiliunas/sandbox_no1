@@ -12,9 +12,34 @@ from .forms import OrderReviewForm, UserUpdateForm, UserProfileUpdateForm, Order
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from datetime import date
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 
 # Create your views here.
+
+def pdf_report_create(request, order_id):
+    reports = OrderLine.objects.all()
+    order = get_object_or_404(Order, pk=order_id)
+    template_path = 'pdf_report.html'
+    context = {'reports': reports, 'order': order}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="order_report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
 
 def homepage(request):
 
@@ -150,6 +175,11 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
     model = Order
     template_name = 'orders.html'
     context_object_name = 'orders'
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super().get_context_data(object_list=object_list, **kwargs)
+    #     context['new_orders_count'] = Order.objects.filter(is_new=True).count()
+    #     return context
 
 
 class OrderDetailView(FormMixin, generic.DetailView):

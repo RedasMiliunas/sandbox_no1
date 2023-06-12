@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<table class="table table-dark table-hover">
+    <tr>
+        <th>Service:</th>
+        <th>Price:</th>
+        <th>Quantity:</th>
+        <th>SUM:</th>
+
+        <th></th>
+    </tr>
+
+{% for line in order.lines.all %}
+    <tr>
+        <td>{{ line.product }}</td>
+        <td>{{ line.product_price }}</td>
+        <td>{{ line.qty }}</td>
+        <td>{{ line.sum_for }}</td>
+        <td></td>
+    </tr>
+{% endfor %}
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><strong>TOTAL: </strong></td>
+        <td>{{ order.total }}</td>
+
+    </tr>
+</table>
+
+</body>
+</html>

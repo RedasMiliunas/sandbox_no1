@@ -43,4 +43,6 @@ urlpatterns = [
     path('orders/<int:order_id>/delete_orderline/<int:pk>', views.OrderLineDeleteView.as_view(), name='delete_orderline'),
     path('contacts/', views.contacts, name='contacts'),
     path('profile/', views.profile, name='profile'),
+    path('pdf_report/<int:order_id>>', views.pdf_report_create, name='pdf_report'),
+    # path('pdf_report/<int:order_id>', views.pdf_report_create, name='pdf_report'),
 ]

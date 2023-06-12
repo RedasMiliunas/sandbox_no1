@@ -1,5 +1,6 @@
 import datetime
-
+from django.db.models import Q
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
@@ -96,6 +97,8 @@ class Order(models.Model):
     due_back = models.DateField(verbose_name='Will be available', null=True, blank=True, )
     model = models.ForeignKey(to='VehicleModel', verbose_name='Model', on_delete=models.SET_NULL, null=True,
                               blank=True, )
+
+
 
 
     def order_count(self):
