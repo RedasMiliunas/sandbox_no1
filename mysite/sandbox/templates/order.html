@@ -32,25 +32,6 @@
     <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>
 </div>
 
-
-
-
-{% comment 'Nereikalinga kodo dalis' %}
-<!--{% if order.customer == user %}-->
-<!--{% if user.is_staff %}-->
-<!--    <div>-->
-<!--        <a class="btn btn-dark btn-default" href="{% url 'order_update' order.id %}">UPDATE</a>-->
-<!--        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>-->
-<!--    </div>-->
-<!--{% else %}-->
-<!--    <div>-->
-<!--        <a class="btn btn-danger btn-default" href="{% url 'order_delete' order.id %}">DELETE</a>-->
-<!--    </div>-->
-<!--{% endif %}-->
-<!--{% endif %}-->
-{% endcomment%}
-
-
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h3>Booked services:</h3>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -137,6 +118,8 @@
   {% endif %}
 
 <hr>
+
+
 
 {% else %}
 {% if order.customer == user %}
@@ -251,7 +234,6 @@
 <hr>
 {% else %}
 <h3><strong>Not Found: 404 ERROR.</strong></h3>
-<h3><strong>This Information is Forbiden!</strong></h3>
 
 {% endif %}
 {% endif %}

@@ -43,8 +43,7 @@
 
 {% for element in user_orders %}
     {% if element.is_overdue %}
-    <h5><strong>There are some bad news:</strong></h5>
-    <hr>
+
 <ul>
 <li>
 <p>{{ element.customer }} <a href="{% url 'order' element.pk %}">[{{ element.date }}]</a>; {{ element.status }} : <span class="{% if element.is_overdue %}text-danger{% endif %}">
